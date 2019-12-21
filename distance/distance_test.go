@@ -3,8 +3,23 @@ package distance
 import (
 	"testing"
 
+	"github.com/khanal-abhi/jsonrpc2"
+
 	amath "github.com/khanal-abhi/abgis/math"
 )
+
+func TestHandle(t *testing.T) {
+	r := jsonrpc2.Request{
+		ID:      1,
+		Method:  "",
+		Params:  "[[1, 0], [0, 1]]",
+		JSONRpc: jsonrpc2.JSONRPCVersion,
+	}
+	res := Handle(r, []string{"Euclidean"})
+	if res.Error.Code != 0 {
+		t.Fail()
+	}
+}
 
 func TestEuclidean(t *testing.T) {
 	th := 0.001
